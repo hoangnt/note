@@ -69,8 +69,8 @@ class NotificationUtils {
   static Future<void> setupFlutterNotifications() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(iconNoti);
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
+    final DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
       requestSoundPermission: true,
       requestBadgePermission: true,
       requestAlertPermission: true,
@@ -83,8 +83,14 @@ class NotificationUtils {
     );
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onSelectNotification: (payload) => _onSelectNotification(payload),
+      onDidReceiveNotificationResponse: _onSelectNotification,
+      onDidReceiveBackgroundNotificationResponse: _onSelectNotification,
     );
+
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestPermission();
 
     AndroidNotificationChannel channel = const AndroidNotificationChannel(
       androidNotiChannelId,
@@ -106,11 +112,7 @@ class NotificationUtils {
     );
   }
 
-  static void _onSelectNotification(String? payload) {
-    if (payload == null) {
-      return;
-    }
-
+  static void _onSelectNotification(NotificationResponse? payload) {
     Navigator.popUntil(
       AppNavigatorState.navigatorState.currentContext!,
       (route) => route.isFirst,
