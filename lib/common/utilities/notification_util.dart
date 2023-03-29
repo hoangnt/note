@@ -112,6 +112,8 @@ class NotificationUtils {
     );
   }
 
+  // need fully uninstall and install app
+  @pragma('vm:entry-point')
   static void _onSelectNotification(NotificationResponse? payload) {
     Navigator.popUntil(
       AppNavigatorState.navigatorState.currentContext!,
