@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -61,6 +63,27 @@ class NotificationUtils {
     }
   }
 
+  static Future<void> _appTerminatedHandler() async {
+    NotificationAppLaunchDetails? _data =
+        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+
+    if (_data == null) {
+      return;
+    }
+
+    if (!_data.didNotificationLaunchApp) {
+      return;
+    }
+
+    if (_data.notificationResponse == null ||
+        _data.notificationResponse!.payload == null) {
+      return;
+    }
+
+    Map<String, dynamic> notify =
+        json.decode(_data.notificationResponse!.payload!);
+  }
+
   static Future<void> setupFlutterNotifications() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(iconNoti);
@@ -107,8 +130,9 @@ class NotificationUtils {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-  }
 
+    _appTerminatedHandler();
+  }
 
   // need fully uninstall and install app
   @pragma('vm:entry-point')
