@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:my_note/common/helper/app_navigator_state.dart';
@@ -35,12 +34,12 @@ class NotificationUtils {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Message: ${message.data}');
 
-      if (message.notification != null) {
+      if (message.data["title"] != null) {
         idNotification += 1;
         await flutterLocalNotificationsPlugin.show(
           idNotification,
-          message.notification!.title,
-          message.notification!.body,
+          message.data["title"],
+          message.data["body"],
           notiDetails,
           payload: message.data.toString(),
         );
@@ -48,18 +47,14 @@ class NotificationUtils {
     });
   }
 
-  static void listenNotificationBackground() {
-    FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
-  }
-
-  static Future<void> _backgroundHandler(RemoteMessage message) async {
-    await Firebase.initializeApp();
-    if (message.notification != null) {
+  @pragma('vm:entry-point')
+  static Future<void> backgroundHandler(RemoteMessage message) async {
+    if (message.data["title"] != null) {
       idNotification += 1;
       await flutterLocalNotificationsPlugin.show(
         idNotification,
-        message.notification!.title,
-        message.notification!.body,
+        message.data["title"],
+        message.data["body"],
         notiDetails,
         payload: message.data.toString(),
       );
@@ -92,6 +87,15 @@ class NotificationUtils {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
 
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+
     AndroidNotificationChannel channel = const AndroidNotificationChannel(
       androidNotiChannelId,
       androidNotiChannelName,
@@ -103,15 +107,9 @@ class NotificationUtils {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
   }
 
+  @pragma('vm:entry-point')
   static void _onSelectNotification(NotificationResponse? payload) {
     Navigator.popUntil(
       AppNavigatorState.navigatorState.currentContext!,
