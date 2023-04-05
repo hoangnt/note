@@ -109,6 +109,8 @@ class NotificationUtils {
         ?.createNotificationChannel(channel);
   }
 
+
+  // need fully uninstall and install app
   @pragma('vm:entry-point')
   static void _onSelectNotification(NotificationResponse? payload) {
     Navigator.popUntil(
