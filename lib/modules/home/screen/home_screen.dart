@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final HomeController _controller = Get.find();
+  final _controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
