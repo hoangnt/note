@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_note/modules/home/controller/home_controller.dart';
+import 'package:my_note/modules/settings/screen/settings_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   final _controller = Get.find<HomeController>();
 
   @override
@@ -23,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPageChanged: _controller.onSelectBottomBar,
           children: [
             Text("home"),
-            Text("settings"),
+            SettingsScreen(),
           ],
         );
       }),

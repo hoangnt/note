@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_note/modules/home/binding/home_binding.dart';
 import 'package:my_note/modules/home/screen/home_screen.dart';
+import 'package:my_note/modules/settings/binding/settings_binding.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,8 +17,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/",
           page: () => HomeScreen(),
-          binding: HomeBinding(),
-        )
+          bindings: [
+            HomeBinding(),
+            SettingsBinding(),
+          ],
+        ),
       ],
     );
   }
