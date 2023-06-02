@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_note/common/constant/app_color.dart';
 import 'package:my_note/modules/home/controller/home_controller.dart';
 import 'package:my_note/modules/settings/screen/settings_screen.dart';
 
@@ -40,11 +41,11 @@ class HomeScreen extends StatelessWidget {
                 label: 'Settings',
               ),
             ],
-            selectedItemColor: Colors.amber,
+            selectedItemColor: AppColor.primary,
             showUnselectedLabels: true,
             showSelectedLabels: true,
             type: BottomNavigationBarType.fixed,
-            selectedIconTheme: IconThemeData(color: Colors.amber),
+            selectedIconTheme: IconThemeData(color: AppColor.primary),
           );
         },
       ),

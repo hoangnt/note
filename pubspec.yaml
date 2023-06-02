@@ -30,6 +30,7 @@ dependencies:
   shared_preferences: ^2.1.1
   http: ^0.13.5
   http_interceptor: ^1.0.1
+  flutter_screenutil: ^5.7.0
 
   firebase_core: ^2.11.0
   firebase_messaging: ^14.5.0
