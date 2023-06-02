@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:my_note/common/helper/app_navigator_state.dart';
+import 'package:my_note/common/constant/app_navigator_key.dart';
 
 class NotificationUtils {
   static final NotificationUtils _singleton = NotificationUtils._();
@@ -138,7 +138,7 @@ class NotificationUtils {
   @pragma('vm:entry-point')
   static void _onSelectNotification(NotificationResponse? payload) {
     Navigator.popUntil(
-      AppNavigatorState.navigatorState.currentContext!,
+      AppNavigatorKey.navigatorKey.currentContext!,
       (route) => route.isFirst,
     );
   }
