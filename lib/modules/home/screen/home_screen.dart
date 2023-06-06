@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_note/config/routes.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -12,7 +13,10 @@ class HomeScreen extends StatelessWidget {
           height: 40,
           child: ElevatedButton(
             onPressed: () {
-              Get.toNamed("/cart");
+              Get.toNamed(
+                Routes.cart,
+                parameters: {"name": "Hoang"},
+              );
             },
             child: Text("go to cart"),
           ),

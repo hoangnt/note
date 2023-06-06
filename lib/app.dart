@@ -9,6 +9,8 @@ import 'package:my_note/modules/home/binding/entry_binding.dart';
 import 'package:my_note/modules/home/screen/entry_screen.dart';
 import 'package:my_note/modules/settings/binding/settings_binding.dart';
 
+import 'config/routes.dart';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,10 @@ class MyApp extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black, size: 20.sp),
           ),
         ),
-        initialRoute: "/home",
+        initialRoute: Routes.entry,
         getPages: [
           GetPage(
-            name: "/home",
+            name: Routes.entry,
             page: () => EntryScreen(),
             bindings: [
               EntryBinding(),
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
             ],
           ),
           GetPage(
-            name: "/cart",
+            name: Routes.cart,
             page: () => CartScreen(),
             binding: CartBinding(),
           ),
