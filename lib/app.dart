@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:my_note/common/constant/app_color.dart';
-import 'package:my_note/modules/home/binding/home_binding.dart';
-import 'package:my_note/modules/home/screen/home_screen.dart';
+import 'package:my_note/modules/cart/binding/cart_binding.dart';
+import 'package:my_note/modules/cart/screen/cart_screen.dart';
+import 'package:my_note/modules/home/binding/entry_binding.dart';
+import 'package:my_note/modules/home/screen/entry_screen.dart';
 import 'package:my_note/modules/settings/binding/settings_binding.dart';
 
 class MyApp extends StatelessWidget {
@@ -28,15 +30,20 @@ class MyApp extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black, size: 20.sp),
           ),
         ),
-        initialRoute: "/",
+        initialRoute: "/home",
         getPages: [
           GetPage(
-            name: "/",
-            page: () => HomeScreen(),
+            name: "/home",
+            page: () => EntryScreen(),
             bindings: [
-              HomeBinding(),
+              EntryBinding(),
               SettingsBinding(),
             ],
+          ),
+          GetPage(
+            name: "/cart",
+            page: () => CartScreen(),
+            binding: CartBinding(),
           ),
         ],
       ),
