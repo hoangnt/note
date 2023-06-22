@@ -82,6 +82,7 @@ class NotificationUtils {
 
     Map<String, dynamic> notify =
         json.decode(_data.notificationResponse!.payload!);
+    print(notify);
   }
 
   static Future<void> setupFlutterNotifications() async {

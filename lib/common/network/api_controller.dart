@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http_interceptor.dart';
 
 import 'package:my_note/common/network/interceptor.dart';

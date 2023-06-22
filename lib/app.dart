@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -8,8 +9,7 @@ import 'package:my_note/modules/cart/screen/cart_screen.dart';
 import 'package:my_note/modules/home/binding/entry_binding.dart';
 import 'package:my_note/modules/home/screen/entry_screen.dart';
 import 'package:my_note/modules/settings/binding/settings_binding.dart';
-
-import 'config/routes.dart';
+import 'package:my_note/config/routes.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black, size: 20.sp),
           ),
         ),
+        builder: EasyLoading.init(),
         initialRoute: Routes.entry,
         getPages: [
           GetPage(
