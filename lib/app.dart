@@ -4,11 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:my_note/common/constant/app_color.dart';
-import 'package:my_note/modules/cart/binding/cart_binding.dart';
-import 'package:my_note/modules/cart/screen/cart_screen.dart';
-import 'package:my_note/modules/home/binding/entry_binding.dart';
-import 'package:my_note/modules/home/screen/entry_screen.dart';
-import 'package:my_note/modules/settings/binding/settings_binding.dart';
+import 'package:my_note/config/pages.dart';
 import 'package:my_note/config/routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -34,21 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         builder: EasyLoading.init(),
         initialRoute: Routes.entry,
-        getPages: [
-          GetPage(
-            name: Routes.entry,
-            page: () => EntryScreen(),
-            bindings: [
-              EntryBinding(),
-              SettingsBinding(),
-            ],
-          ),
-          GetPage(
-            name: Routes.cart,
-            page: () => CartScreen(),
-            binding: CartBinding(),
-          ),
-        ],
+        getPages: Pages.instance.getPages,
       ),
     );
   }
