@@ -18,6 +18,7 @@ class NotificationUtils {
 
   // config variable
   static int idNotification = 0;
+  static String _lastNotiId = "";
   static const String iconNoti = "@mipmap/launcher_icon";
   static const String androidNotiChannelId = "channel_id";
   static const String androidNotiChannelName = "Channel Name";
@@ -36,14 +37,15 @@ class NotificationUtils {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Message: ${message.data}');
 
-      if (message.data["title"] != null) {
+      if (message.data["title"] != null && message.data["id"] != _lastNotiId) {
+        _lastNotiId = message.data["id"];
         idNotification += 1;
         await flutterLocalNotificationsPlugin.show(
           idNotification,
-          message.data["title"],
-          message.data["body"],
+          message.notification?.title,
+          message.notification?.body,
           notiDetails,
-          payload: message.data.toString(),
+          payload: json.encode(message.data),
         );
       }
     });
@@ -51,14 +53,17 @@ class NotificationUtils {
 
   @pragma('vm:entry-point')
   static Future<void> backgroundHandler(RemoteMessage message) async {
-    if (message.data["title"] != null) {
+    print('Message: ${message.data}');
+
+    if (message.data["title"] != null && message.data["id"] != _lastNotiId) {
+      _lastNotiId = message.data["id"];
       idNotification += 1;
       await flutterLocalNotificationsPlugin.show(
         idNotification,
-        message.data["title"],
-        message.data["body"],
+        message.notification?.title,
+        message.notification?.body,
         notiDetails,
-        payload: message.data.toString(),
+        payload: json.encode(message.data),
       );
     }
   }
@@ -80,9 +85,9 @@ class NotificationUtils {
       return;
     }
 
-    Map<String, dynamic> notify =
-        json.decode(_data.notificationResponse!.payload!);
-    print(notify);
+    // Map<String, dynamic> notify =
+    //     json.decode(_data.notificationResponse!.payload!);
+    // print(notify);
   }
 
   static Future<void> setupFlutterNotifications() async {
@@ -138,6 +143,12 @@ class NotificationUtils {
   // need fully uninstall and install app
   @pragma('vm:entry-point')
   static void _onSelectNotification(NotificationResponse? payload) {
+    if (payload == null || payload.payload == null) {
+      debugPrint("no payload data");
+      return;
+    }
+
+    print(json.decode(payload.payload!));
     Navigator.popUntil(
       AppNavigatorKey.navigatorKey.currentContext!,
       (route) => route.isFirst,
