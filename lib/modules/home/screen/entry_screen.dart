@@ -15,10 +15,8 @@ class EntryScreen extends StatelessWidget {
         title: Text("this is appbar"),
       ),
       body: GetBuilder<EntryController>(builder: (_) {
-        return PageView(
-          controller: _controller.pageController,
-          physics: NeverScrollableScrollPhysics(),
-          onPageChanged: _controller.onSelectBottomBar,
+        return IndexedStack(
+          index: _controller.selectedIndex,
           children: [
             HomeScreen(),
             SettingsScreen(),
