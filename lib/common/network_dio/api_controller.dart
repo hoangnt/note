@@ -11,7 +11,13 @@ class ApiController {
   static final ApiController _instance = ApiController._();
   ApiController._() {
     _dio = Dio(apiOption);
-    _dio.interceptors.add(TokenInterceptor());
+    _dio.interceptors.addAll([
+      TokenInterceptor(),
+      Interceptor1(),
+      Interceptor2(),
+      Interceptor3(),
+      QueueInterceptor1(),
+    ]);
   }
   factory ApiController() {
     return _instance;
