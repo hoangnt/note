@@ -13,24 +13,16 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            SizedBox(
-              width: 100,
-              height: 40,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(
-                    Routes.cart,
-                    parameters: {"name": "Hoang"},
-                  );
-                },
-                child: Text("go to cart"),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed(
+                  Routes.cart,
+                  parameters: {"name": "Hoang"},
+                );
+              },
+              child: Text("go to cart"),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _controller.callAPI,
-              child: Text("Call test dio"),
-            ),
           ],
         ),
       ),
