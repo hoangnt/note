@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
-import 'package:my_note/common/network/interceptor.dart';
-import 'package:my_note/common/network/model/server_response.dart';
+import 'package:my_note/common/network_http/interceptor.dart';
+import 'package:my_note/common/network_http/model/server_response.dart';
 import 'package:my_note/config/base_url.dart';
 
 class ApiController {
