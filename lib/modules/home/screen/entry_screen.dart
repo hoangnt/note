@@ -15,13 +15,14 @@ class EntryScreen extends StatelessWidget {
         title: Text("this is appbar"),
       ),
       body: GetBuilder<EntryController>(builder: (_) {
-        return IndexedStack(
-          index: _controller.selectedIndex,
-          children: [
-            HomeScreen(),
-            SettingsScreen(),
-          ],
-        );
+        switch (_controller.selectedIndex) {
+          case 0:
+            return HomeScreen();
+          case 1:
+            return SettingsScreen();
+          default:
+            return Container();
+        }
       }),
       bottomNavigationBar: GetBuilder<EntryController>(
         builder: (_) {

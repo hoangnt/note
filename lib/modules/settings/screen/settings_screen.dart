@@ -4,6 +4,7 @@ import 'package:my_note/modules/settings/controller/settings_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   final _controller = Get.find<SettingsController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
