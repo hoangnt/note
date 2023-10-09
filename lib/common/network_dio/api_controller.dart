@@ -13,15 +13,9 @@ class ApiController {
     _dio = Dio(apiOption);
     _dio.interceptors.addAll([
       TokenInterceptor(),
-      Interceptor1(),
-      Interceptor2(),
-      QueueInterceptor1(),
-      QueueInterceptor2(),
     ]);
   }
-  factory ApiController() {
-    return _instance;
-  }
+  factory ApiController() => _instance;
 
   late Dio _dio;
   final BaseOptions apiOption = BaseOptions(

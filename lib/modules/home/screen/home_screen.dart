@@ -23,10 +23,6 @@ class HomeScreen extends StatelessWidget {
               child: Text("go to cart"),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _controller.callAPI,
-              child: Text("call api"),
-            ),
           ],
         ),
       ),
