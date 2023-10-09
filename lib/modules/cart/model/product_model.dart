@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:my_note/common/utilities/parse_date_util.dart';
 
 part 'product_model.g.dart';
 
@@ -6,8 +7,10 @@ part 'product_model.g.dart';
 class ProductModel {
   String? id;
   String? name;
-  DateTime? date;
   double? price;
+
+  @ParseDateUtil()
+  DateTime? date;
 
   ProductModel({this.date, this.id, this.name, this.price});
 
