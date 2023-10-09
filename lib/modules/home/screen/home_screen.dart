@@ -23,6 +23,10 @@ class HomeScreen extends StatelessWidget {
               child: Text("go to cart"),
             ),
             SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("press"),
+            ),
           ],
         ),
       ),
