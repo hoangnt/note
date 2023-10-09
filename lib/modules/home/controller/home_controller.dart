@@ -16,7 +16,15 @@ class HomeController extends GetxController {
 
     _api.get(
       endpoint: "/something",
-      params: {"name": "hoang"},
+      params: {"name": "api1"},
+    );
+    _api.get(
+      endpoint: "/something",
+      params: {"name": "api2"},
+    );
+    _api.get(
+      endpoint: "/something",
+      params: {"name": "api3"},
     );
   }
 }

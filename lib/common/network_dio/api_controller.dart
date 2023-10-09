@@ -15,8 +15,8 @@ class ApiController {
       TokenInterceptor(),
       Interceptor1(),
       Interceptor2(),
-      Interceptor3(),
       QueueInterceptor1(),
+      QueueInterceptor2(),
     ]);
   }
   factory ApiController() {
