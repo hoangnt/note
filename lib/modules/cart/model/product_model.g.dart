@@ -17,6 +17,6 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'date': const ParseDateUtil().toJson(instance.date),
       'price': instance.price,
+      'date': const ParseDateUtil().toJson(instance.date),
     };

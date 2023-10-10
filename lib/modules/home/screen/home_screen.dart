@@ -24,8 +24,12 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {},
-              child: Text("press"),
+              onPressed: _controller.getUser,
+              child: Text("get user"),
+            ),
+            ElevatedButton(
+              onPressed: _controller.saveUser,
+              child: Text("save user"),
             ),
           ],
         ),
