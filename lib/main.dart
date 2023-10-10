@@ -17,7 +17,7 @@ void main() async {
   ConfigLoading.configLoading();
 
   // dependencies
-  DependenciesInjection().boxInjection();
+  await boxInit();
 
   runApp(MyApp());
   FirebaseMessaging.onBackgroundMessage(NotificationUtils.backgroundHandler);

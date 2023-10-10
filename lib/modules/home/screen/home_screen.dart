@@ -23,7 +23,6 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text("go to cart"),
             ),
-            SizedBox(height: 10),
             ElevatedButton(
               onPressed: _controller.getUser,
               child: Text("get user hive"),
