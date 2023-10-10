@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ElevatedButton(
               onPressed: () {
@@ -25,11 +26,11 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: _controller.getUser,
-              child: Text("get user"),
+              child: Text("get user hive"),
             ),
             ElevatedButton(
               onPressed: _controller.saveUser,
-              child: Text("save user"),
+              child: Text("save user hive"),
             ),
           ],
         ),
