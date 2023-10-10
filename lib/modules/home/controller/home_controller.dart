@@ -24,7 +24,11 @@ class HomeController extends GetxController {
     UserModel? id1 = _boxUser.get("id1");
     // id1?.age = 999;
     // id1?.save();
-    print(id1?.toJson());
+    // print(id1?.toJson());
+    _boxUser.toMap().forEach((key, val) {
+      print("$key======");
+      print(val.toJson());
+    });
   }
 
   Future<void> saveUser() async {
