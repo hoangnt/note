@@ -4,7 +4,6 @@ import 'package:my_note/modules/cart/binding/cart_binding.dart';
 import 'package:my_note/modules/cart/screen/cart_screen.dart';
 import 'package:my_note/modules/home/binding/entry_binding.dart';
 import 'package:my_note/modules/home/screen/entry_screen.dart';
-import 'package:my_note/modules/settings/binding/settings_binding.dart';
 
 class Pages {
   static final Pages instance = Pages._();
@@ -16,10 +15,7 @@ class Pages {
       GetPage(
         name: Routes.entry,
         page: () => EntryScreen(),
-        bindings: [
-          EntryBinding(),
-          SettingsBinding(),
-        ],
+        binding: EntryBinding(),
       ),
       GetPage(
         name: Routes.cart,

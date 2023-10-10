@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_note/common/constant/app_color.dart';
 import 'package:my_note/modules/home/controller/entry_controller.dart';
 import 'package:my_note/modules/home/screen/home_screen.dart';
-import 'package:my_note/modules/settings/screen/settings_screen.dart';
+import 'package:my_note/modules/home/screen/settings_screen.dart';
 
 class EntryScreen extends StatelessWidget {
   final _controller = Get.find<EntryController>();

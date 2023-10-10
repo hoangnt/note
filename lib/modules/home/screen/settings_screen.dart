@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_note/modules/settings/controller/settings_controller.dart';
+import 'package:my_note/modules/home/controller/settings_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   final _controller = Get.find<SettingsController>();
