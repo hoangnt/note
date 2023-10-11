@@ -26,7 +26,7 @@ class HomeController extends GetxController {
     // id1?.save();
     // print(id1?.toJson());
     _boxUser.toMap().forEach((key, val) {
-      print("$key======");
+      print("======$key");
       print(val.toJson());
     });
   }
