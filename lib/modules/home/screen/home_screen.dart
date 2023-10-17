@@ -31,6 +31,10 @@ class HomeScreen extends StatelessWidget {
               onPressed: _controller.saveUser,
               child: Text("save user hive"),
             ),
+            ElevatedButton(
+              onPressed: _controller.toggleLanguage,
+              child: Text("change language"),
+            ),
           ],
         ),
       ),

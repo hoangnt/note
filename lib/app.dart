@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:my_note/common/constant/app_color.dart';
+import 'package:my_note/common/utilities/i10n.dart';
 import 'package:my_note/config/pages.dart';
 import 'package:my_note/config/routes.dart';
 
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
+        translations: I10n(),
+        locale: Locale('en', 'US'),
+        fallbackLocale: Locale('en', 'US'),
         theme: ThemeData(
           primaryColor: AppColor.primary,
           visualDensity: VisualDensity.adaptivePlatformDensity,

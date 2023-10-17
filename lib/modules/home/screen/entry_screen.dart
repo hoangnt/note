@@ -13,7 +13,7 @@ class EntryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("this is appbar"),
+        title: Text('titleAppbar'.tr),
       ),
       body: GetBuilder<EntryController>(builder: (_) {
         return PageTransitionSwitcher(
@@ -52,11 +52,11 @@ class EntryScreen extends StatelessWidget {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Home',
+                label: 'homeNavigator'.tr,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: 'Settings',
+                label: 'settingNavigator'.tr,
               ),
             ],
           );

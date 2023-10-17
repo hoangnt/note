@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -36,5 +37,13 @@ class HomeController extends GetxController {
     await _boxUser.putAll(
       listUser.asMap().map((index, val) => MapEntry(val.id, val)),
     );
+  }
+
+  void toggleLanguage() {
+    if (Get.locale == Locale("vi", "VN")) {
+      Get.updateLocale(Locale("en", "US"));
+      return;
+    }
+    Get.updateLocale(Locale("vi", "VN"));
   }
 }
