@@ -1,11 +1,19 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:my_note/common/constant/hive_box_key.dart';
 import 'package:my_note/modules/cart/model/user_model.dart';
+import 'dart:ui' as ui;
+import 'package:path_provider/path_provider.dart';
 
 class HomeController extends GetxController {
+  final GlobalKey captureKey = GlobalKey();
+
   final List<UserModel> listUser = [
     UserModel(id: "id1", name: "nguyen the hoang", age: 20),
     UserModel(id: "id2", name: "nguyen the hoan", age: 23),
@@ -45,5 +53,27 @@ class HomeController extends GetxController {
       return;
     }
     Get.updateLocale(Locale("vi", "VN"));
+  }
+
+  Future<void> captureWidget() async {
+    RenderRepaintBoundary? boundary =
+        captureKey.currentContext!.findRenderObject() as RenderRepaintBoundary?;
+
+    if (boundary == null) {
+      return;
+    }
+
+    ui.Image image = await boundary.toImage();
+    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+    if (byteData == null) {
+      return;
+    }
+
+    final directory = (await getDownloadsDirectory())!.path;
+    Uint8List pngBytes = byteData.buffer.asUint8List();
+    File imgFile = File("$directory/screenshot.png");
+
+    await imgFile.writeAsBytes(pngBytes);
   }
 }
