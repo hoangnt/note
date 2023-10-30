@@ -35,6 +35,10 @@ class HomeScreen extends StatelessWidget {
               onPressed: _controller.toggleLanguage,
               child: Text("change language"),
             ),
+            ElevatedButton(
+              onPressed: _controller.triggerBackgroundTask,
+              child: Text("background task1"),
+            ),
           ],
         ),
       ),
