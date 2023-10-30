@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:flutter/rendering.dart';
@@ -84,5 +85,34 @@ class HomeController extends GetxController {
       "unique-id",
       BackgroundTaskName.task1,
     );
+  }
+
+  Future<void> isolateSpawner() async {
+    ReceivePort receivePort = ReceivePort();
+    final isolate =
+        await Isolate.spawn<SendPort>(_isolateTask, receivePort.sendPort);
+
+    receivePort.listen((data) {
+      print(data);
+
+      if (data == true) {
+        isolate.kill();
+      }
+    });
+  }
+
+  // must be static or top-level function
+  static void _isolateTask(dynamic param) {
+    int result = 0;
+    SendPort sendPort = param as SendPort;
+
+    // heavy task
+    for (var i = 0; i <= 5000; i++) {
+      result = i;
+      print(i);
+    }
+
+    sendPort.send(result);
+    sendPort.send(true);
   }
 }
