@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
@@ -95,24 +96,23 @@ class HomeController extends GetxController {
     receivePort.listen((data) {
       print(data);
 
-      if (data == true) {
+      if (data == 2) {
         isolate.kill();
+        receivePort.close();
       }
     });
   }
 
   // must be static or top-level function
   static void _isolateTask(dynamic param) {
-    int result = 0;
     SendPort sendPort = param as SendPort;
 
-    // heavy task
-    for (var i = 0; i <= 5000; i++) {
-      result = i;
-      print(i);
-    }
-
-    sendPort.send(result);
-    sendPort.send(true);
+    Timer.periodic(Duration(seconds: 10), (timer) {
+      // heavy task
+      for (var i = 0; i <= 10000; i++) {
+        print(i);
+      }
+      sendPort.send(timer.tick);
+    });
   }
 }
