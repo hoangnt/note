@@ -114,7 +114,7 @@ class NotificationUtils {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+        ?.requestNotificationsPermission();
 
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
