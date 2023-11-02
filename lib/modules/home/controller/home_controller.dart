@@ -4,6 +4,7 @@ import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -17,12 +18,14 @@ import 'package:workmanager/workmanager.dart';
 
 class HomeController extends GetxController {
   final GlobalKey captureKey = GlobalKey();
+  static const channel = MethodChannel('channel_name');
 
   final List<UserModel> listUser = [
     UserModel(id: "id1", name: "nguyen the hoang", age: 20),
     UserModel(id: "id2", name: "nguyen the hoan", age: 23),
     UserModel(id: "id3", name: "nguyen the hoa", age: 27),
   ];
+  int batteryLevel = 0;
 
   @override
   void onInit() async {
@@ -114,5 +117,32 @@ class HomeController extends GetxController {
       }
       sendPort.send(timer.tick);
     });
+  }
+
+  // Native call
+  Future<void> nativeCallOnceOff() async {
+    try {
+      batteryLevel = await channel.invokeMethod<int>('getBattery') ?? 0;
+    } on PlatformException catch (e) {
+      print(e);
+    }
+    update();
+  }
+
+  Future<void> nativeCallListen() async {
+    channel.setMethodCallHandler((call) async {
+      if (call.method == "testLoop") {
+        batteryLevel = call.arguments as int;
+        update();
+      }
+
+      return null;
+    });
+
+    try {
+      channel.invokeMethod('testLoop');
+    } on PlatformException catch (e) {
+      print(e);
+    }
   }
 }
