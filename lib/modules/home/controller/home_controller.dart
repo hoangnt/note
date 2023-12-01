@@ -145,4 +145,18 @@ class HomeController extends GetxController {
       print(e);
     }
   }
+
+  // read asset into file
+  Future<File> getImageFileFromAssets(String path) async {
+    final byteData = await rootBundle.load(path);
+    final directory = await getTemporaryDirectory();
+    final file = File('${directory.path}/$path');
+
+    await file.create(recursive: true);
+    await file.writeAsBytes(byteData.buffer.asUint8List(
+      byteData.offsetInBytes,
+      byteData.lengthInBytes,
+    ));
+    return file;
+  }
 }
