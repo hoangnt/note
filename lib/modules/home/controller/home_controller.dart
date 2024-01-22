@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
-import 'dart:typed_data';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_note/common/constant/background_task_name.dart';
 import 'package:my_note/common/constant/hive_box_key.dart';
 import 'package:my_note/modules/cart/model/user_model.dart';
@@ -158,5 +158,29 @@ class HomeController extends GetxController {
       byteData.lengthInBytes,
     ));
     return file;
+  }
+
+  // save image to local path
+  Future<void> saveImageToLocal(XFile image) async {
+    final dir = await getApplicationDocumentsDirectory();
+    String _localPath = "${dir.path}/my_folder";
+    final savedDir = Directory(_localPath);
+    bool existed = await savedDir.exists();
+    if (!existed) {
+      savedDir.create();
+    }
+    image.saveTo("$_localPath/${image.name}");
+  }
+
+  // get all saved image
+  Future<void> getSavedBackground() async {
+    final dir = await getApplicationDocumentsDirectory();
+    String _localPath = "${dir.path}/my_folder";
+    final savedDir = Directory(_localPath);
+    bool existed = await savedDir.exists();
+    if (!existed) {
+      return;
+    }
+    List<FileSystemEntity> filesAndFolder = savedDir.listSync();
   }
 }
